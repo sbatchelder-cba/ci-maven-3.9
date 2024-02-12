@@ -20,6 +20,7 @@ runs:
   using: composite
   steps:
     - id: maven3_9-compile
+      name: Maven 3.9 Compile
       kind: build
       uses: docker://maven:3.9-amazoncorretto-17
       shell: sh
@@ -28,6 +29,7 @@ runs:
         mvn -v
 
     - id: maven3_9-test
+      name: Maven 3.9 Test
       uses: docker://maven:3.9-amazoncorretto-17
       kind: test
       shell: sh
