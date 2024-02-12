@@ -32,5 +32,5 @@ runs:
       kind: test
       shell: sh
       run: |
-        echo "Build Args ${{ inputs.mvn-build-args }}"
+        echo "Build Args ${{ inputs.mvn-test-args }}"
         mvn -v
