@@ -1,0 +1,36 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: 'CI Maven 3.9'
+description: 'CI Maven 3.9'
+
+inputs:
+  context:
+    description: 'Maven build context'
+    default: ${{ cloudbees.workspace }}
+  mvn-compile-args:
+    description: 'Maven compile arguments'
+    required: false
+    default: ''
+  mvn-test-args:
+    description: 'Maven test arguments'
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - id: maven3_9-compile
+      kind: build
+      uses: docker://maven:3.9-amazoncorretto-17
+      shell: sh
+      run: |
+        echo "Compile Args: ${{ inputs.mvn-compile-args }}"
+        mvn -v
+
+    - id: maven3_9-test
+      uses: docker://maven:3.9-amazoncorretto-17
+      kind: test
+      shell: sh
+      run: |
+        echo "Build Args ${{ inputs.mvn-build-args }}"
+        mvn -v
